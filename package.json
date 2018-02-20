@@ -1,0 +1,28 @@
+{
+  "name": "js-contact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "nyc mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "js-api-client": "file:../js-api-client",
+    "js-mapper": "file:///Users/gaelphilippe/IdeaProjects/ajstage-integration/js-mapper",
+    "randomstring": "^1.1.5",
+    "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "git+ssh://git@github.com/chaijs/chai-http.git",
+    "express": "^4.16.2",
+    "nock": "^9.1.6",
+    "nyc": "^11.4.1",
+    "redis": "^2.8.0"
+  }
+}
