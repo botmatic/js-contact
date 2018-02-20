@@ -306,7 +306,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
       const res = await jsApiClient.createContact(botmaticContact, token)
 
       if (res.success) {
-        keyStore.saveIds(0, res.id, extContact.id)
+        keyStore.saveIds(token, res.id, extContact.id)
       }
 
       return res
@@ -325,7 +325,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
       const botmaticContact = mapper.mapTo(extContact, 'ext', 'botmatic')
       const extIdKey = mapper.getExtIdKey()
       debug('extIdKey', extIdKey)
-      const botmaticId = await keyStore.getBotmaticId(0, extContact[extIdKey])
+      const botmaticId = await keyStore.getBotmaticId(token, extContact[extIdKey])
 
       if (botmaticId !== null) {
         botmaticContact.id = botmaticId
@@ -345,13 +345,13 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
      * @returns {Promise<{success: boolean, error: object}>}
      */
     deleteContact: async (extId, token) => {
-      const botmaticId = await keyStore.getBotmaticId(0, extId)
+      const botmaticId = await keyStore.getBotmaticId(token, extId)
 
       if (botmaticId !== null) {
         const res = await jsApiClient.deleteContact(botmaticId, token)
 
         if (res.success) {
-          keyStore.deleteIds(0, botmaticId, extId)
+          keyStore.deleteIds(token, botmaticId, extId)
         }
 
         return res
