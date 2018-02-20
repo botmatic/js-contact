@@ -269,7 +269,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
   if (!mappings) throw "mappings is required"
   if (!keyStore) throw "keyStore is required"
 
-  const botmatic = require('../../../js-integration/src/index')(
+  const botmatic = require('js-integration')(
     {
       endpoint,
       port,
