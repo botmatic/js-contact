@@ -21,9 +21,6 @@
 
 //
 const debug = require('debug')('botmatic:js-contact')
-require('dotenv').config({
-  path: path.join(__dirname, '/../.env')
-})
 
 const zip = rows => rows[0].map((_,c) => rows.map(row => row[c]))
 
