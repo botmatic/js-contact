@@ -155,21 +155,30 @@ const makeUninstallListener = (jsApiClient, consumer, keyStore, callback) =>
  * CONTACT CREATED EVENT
  * @ignore
  */
-const makeCreateListener = (consumer, mapper, keyStore) =>
+const makeCreateListener = (consumer, mapper, keyStore, jsApiClient) =>
   async ({auth: {token, client}, data}) => {
     debug("AJ CONTACT CREATED", data)
-    const contact = data.data
+    const botmaticContact = data.data
 
-    if (contact) {
-      debug(contact)
-      const extContact = mapper.mapTo(contact, 'botmatic', 'ext')
+    if (botmaticContact) {
+      debug(botmaticContact)
+      const extContact = mapper.mapTo(botmaticContact, 'botmatic', 'ext')
+      const {success, contact, error} = await consumer.getContactByEmail(contact.email)
+      let result
 
-      debug('mapped', extContact)
-      const result = await consumer.createContact(extContact)
+      if (!success) {
+        debug('mapped', extContact)
+        result = await consumer.createContact(extContact)
+      } else {
+        result = {success, id: contact.id}
+
+        const bmContact = mapper.mapTo(contact, 'ext', 'botmatic')
+        await jsApiClient.updateContact(bmContact, token)
+      }
 
       if (result.success) {
         debug("save ids")
-        const r = await keyStore.saveIds(token, contact.id, result.id)
+        const r = await keyStore.saveIds(token, botmaticContact.id, result.id)
         debug(r)
       }
 
@@ -284,7 +293,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
   botmatic.onInstall(makeInstallListener(jsApiClient, consumer, mapper))
   botmatic.onUninstall(makeUninstallListener(jsApiClient, consumer, mapper))
 
-  botmatic.onEvent(botmatic.events.CONTACT_CREATED, makeCreateListener(consumer, mapper, keyStore))
+  botmatic.onEvent(botmatic.events.CONTACT_CREATED, makeCreateListener(consumer, mapper, keyStore, jsApiClient))
   botmatic.onEvent(botmatic.events.CONTACT_UPDATED, makeUpdateListener(consumer, mapper, keyStore))
   botmatic.onEvent(botmatic.events.CONTACT_DELETED, makeDeleteListener(consumer, mapper, keyStore))
 
