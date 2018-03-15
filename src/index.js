@@ -157,7 +157,7 @@ const makeUninstallListener = (jsApiClient, consumer, keyStore, callback) =>
  */
 const makeCreateListener = (consumer, mapper, keyStore, jsApiClient) =>
   async ({auth: {token, client}, data}) => {
-    debug("AJ CONTACT CREATED", data)
+    debug("BM CONTACT CREATED", data)
     const botmaticContact = data.data
 
     if (botmaticContact) {
@@ -195,7 +195,7 @@ const makeCreateListener = (consumer, mapper, keyStore, jsApiClient) =>
  */
 const makeUpdateListener = (consumer, mapper, keyStore) =>
   async ({auth: {token, client}, data}) => {
-    debug("AJ CONTACT UPDATED", data)
+    debug("BM CONTACT UPDATED", data)
     const contact = data.data
 
     if (contact) {
@@ -216,7 +216,10 @@ const makeUpdateListener = (consumer, mapper, keyStore) =>
           return {data: result, type: "data"}
         }
         else {
-          return {data: {success: false, error: "external contact not found"}, type: 'data'}
+          const extContact = mapper.mapTo(botmaticContact, 'botmatic', 'ext')
+          const result = consumer.createContact(extContact)
+
+          return {data: result, type: 'data'}
         }
       } catch (err) {
         console.error(err)
