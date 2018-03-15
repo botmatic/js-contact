@@ -216,7 +216,7 @@ const makeUpdateListener = (consumer, mapper, keyStore) =>
           return {data: result, type: "data"}
         }
         else {
-          const extContact = mapper.mapTo(botmaticContact, 'botmatic', 'ext')
+          const extContact = mapper.mapTo(contact, 'botmatic', 'ext')
           const result = consumer.createContact(extContact)
 
           return {data: result, type: 'data'}
