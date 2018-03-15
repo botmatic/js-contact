@@ -413,7 +413,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
     onSettingsPage: botmatic.onSettingsPage,
     onUpdateSettings: botmatic.onUpdateSettings,
     onEvent: botmatic.onEvent,
-    onAction: botmatic.onEvent
+    onAction: botmatic.onAction
   }
 }
 
