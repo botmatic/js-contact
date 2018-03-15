@@ -219,6 +219,12 @@ const makeUpdateListener = (consumer, mapper, keyStore) =>
           const extContact = mapper.mapTo(contact, 'botmatic', 'ext')
           const result = consumer.createContact(extContact)
 
+          if (result.success) {
+            debug("save ids")
+            const r = await keyStore.saveIds(token, contact.id, result.id)
+            debug(r)
+          }
+
           return {data: result, type: 'data'}
         }
       } catch (err) {
