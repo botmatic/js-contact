@@ -1,5 +1,5 @@
 {
-  "name": "js-contact",
+  "name": "@botmatic/js-contact",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",

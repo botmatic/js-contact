@@ -354,6 +354,36 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
       }
     },
     /**
+     * Updates many contacts on Botmatic
+     * @member updateContact
+     * @function
+     * @param {array} extContacts
+     * @param {string} token
+     * @returns {Promise<{success: boolean, error: object}>}
+     */
+    updateContacts: async (extContacts, token) => {
+      debug('update contacts on botmatic', extContacts)
+
+      const promises = extContacts.map(async extContact => {
+        const botmaticContact = mapper.mapTo(extContact, 'ext', 'botmatic')
+        const extIdKey = mapper.getExtIdKey()
+        debug('extIdKey', extIdKey)
+        const botmaticId = await keyStore.getBotmaticId(token, extContact[extIdKey])
+
+        if (botmaticId !== null) {
+          return {contact_id: botmaticId, contact_props: botmaticContact}
+        }
+        else {
+          return null
+        }
+      })
+
+      const botmaticContacts = (await Promise.all(promises))
+        .filter(c => c !== null)
+
+      return await jsApiClient.updateContacts(botmaticContacts, token)
+    },
+    /**
      * Deletes a contact on Botmatic
      * @member deleteContact
      * @function
