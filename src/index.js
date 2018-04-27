@@ -295,9 +295,9 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
     }
   )
 
-  const mapper = require('js-mapper')(mappings)
+  const mapper = require('@botmatic/js-mapper')(mappings)
 
-  const jsApiClient = require('js-api-client')()
+  const jsApiClient = require('@botmatic/js-api-client')()
 
   botmatic.onInstall(makeInstallListener(jsApiClient, consumer, mapper))
   botmatic.onUninstall(makeUninstallListener(jsApiClient, consumer, mapper))
