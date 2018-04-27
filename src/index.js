@@ -448,6 +448,7 @@ const init = ({consumer, mappings, server, endpoint, port, keyStore, auth}) => {
     importContacts: (token) => importContacts(consumer, jsApiClient, mapper, keyStore, token),
     onSettingsPage: botmatic.onSettingsPage,
     onUpdateSettings: botmatic.onUpdateSettings,
+    sendEventOnCampaign: botmatic.sendEventOnCampaign,
     onEvent: botmatic.onEvent,
     onAction: botmatic.onAction
   }
