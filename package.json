@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@botmatic/js-integration": "^0.4.3",
+    "@botmatic/js-integration": "git@github.com:botmatic/js-integration.git",
     "dotenv": "^5.0.0",
     "@botmatic/js-api-client": "git@github.com:botmatic/js-api-client.git",
     "@botmatic/js-mapper": "git@github.com:botmatic/js-mapper.git",
