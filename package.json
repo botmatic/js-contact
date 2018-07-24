@@ -11,16 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@botmatic/js-integration": "git@github.com:botmatic/js-integration.git",
+    "@botmatic/js-integration": "http://github.com/botmatic/js-integration.git",
     "dotenv": "^5.0.0",
-    "@botmatic/js-api-client": "git@github.com:botmatic/js-api-client.git",
-    "@botmatic/js-mapper": "git@github.com:botmatic/js-mapper.git",
+    "@botmatic/js-api-client": "http://github.com/botmatic/js-api-client.git",
+    "@botmatic/js-mapper": "http://github.com/botmatic/js-mapper.git",
     "randomstring": "^1.1.5",
     "request": "^2.83.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "chai-http": "git+ssh://git@github.com/chaijs/chai-http.git",
+    "chai-http": "http://github.com/chaijs/chai-http.git",
     "express": "^4.16.2",
     "nock": "^9.1.6",
     "nyc": "^11.4.1",
