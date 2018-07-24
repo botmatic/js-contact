@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "chai-http": "http://github.com/chaijs/chai-http.git",
+    "chai-http": "https://github.com/chaijs/chai-http.git",
     "express": "^4.16.2",
     "nock": "^9.1.6",
     "nyc": "^11.4.1",
